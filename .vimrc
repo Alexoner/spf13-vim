@@ -216,22 +216,22 @@
     "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
     "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
     if (has("nvim"))
-        let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+        "let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
     endif
     if (empty($TMUX) || 1)
       if (has("nvim"))
         "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-        "set t_8f=^[[38;2;%lu;%lu;%lum  " Needed in tmux
-        "set t_8b=^[[48;2;%lu;%lu;%lum  " Ditto
-        let $NVIM_TUI_ENABLE_TRUE_COLOR   = 1
+        set t_8f=[38;2;%lu;%lu;%lum  " Needed in tmux
+        set t_8b=[48;2;%lu;%lu;%lum  " Ditto
+        "let $NVIM_TUI_ENABLE_TRUE_COLOR   = 1
       endif
     endif
     "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
     "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
     " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
     if (has("termguicolors"))
-        "set t_8f=^[[38;2;%lu;%lu;%lum  " Needed in tmux
-        "set t_8b=^[[48;2;%lu;%lu;%lum  " Ditto
+        set t_8f=[38;2;%lu;%lu;%lum  " Needed in tmux
+        set t_8b=[48;2;%lu;%lu;%lum  " Ditto
         set termguicolors
     endif
 
@@ -330,6 +330,7 @@
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     set foldenable                  " Auto fold code
+    
     "list feature can be used to reveal hidden characters
     set list
     "type unicode characters: press <ctrl-v>u, followed by its unicode number
@@ -348,7 +349,7 @@
     set wrap                        " wrap long lines
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
-    set noexpandtab                   " Tabs are spaces, not tabs
+    set noexpandtab                 " Tabs are spaces, not tabs
     set tabstop=4                   " An indentation every four columns
     set softtabstop=4               " Let backspace delete indent
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
@@ -362,7 +363,10 @@
     " .vimrc.before.local file:
     "   let g:spf13_keep_trailing_whitespace = 1
     autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
-    autocmd FileType c,cpp,objc,objcpp setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+    " indentation
+    "autocmd FileType c,cpp,objc,objcpp setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+    " use spaces to extend tab
+    autocmd FileType c,cpp,objc,objcpp setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml,javascript,jsx,javascript.jsx,html,xhtml,xml,css,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
@@ -548,7 +552,12 @@
     vnoremap . :normal .<CR>
 
     " For when you forget to sudo.. Really Write the file.
+    " w !sudo tee % > /dev/null
+    " Here, w serves as redirect global range content of current file to
+    " command sudo
     cmap w!! w !sudo tee % >/dev/null
+    " An alternative write with sudo trick: w !sudo cat > %
+    "cmap w!! w !sudo cat > %
 
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
@@ -990,7 +999,7 @@
             "let g:neomake_python_enabled_makers     = ['python', 'pylint', 'flake8']
             let g:neomake_python_enabled_makers      = ['pylint']
             let g:neomake_cpp_enable_markers         = ['clang']
-            let g:neomake_cpp_clang_args             = ["-std=c++14", "-Wextra", "-Wall", "-g"]
+            let g:neomake_cpp_clang_args             = ["-std=c++14", "-Wextra", "-Wall", "-g", "-fsyntax-only"] " prevent generating .pch files
             "let g:neomake_objc_enabled_makers       = ['clang']
             let g:neomake_serialize                  = 1
             let g:neomake_serialize_abort_on_error   = 1

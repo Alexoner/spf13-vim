@@ -176,7 +176,7 @@
             if executable('ctags')
                 Plug 'majutsushi/tagbar'
             endif
-            Plug 'tpope/vim-sleuth', {'for': ['c', 'cpp', 'obj']}                 " automatically detect and set buffer indentation options
+            Plug 'tpope/vim-sleuth', {'for': ['c', 'cpp', 'obj']}    " heuristically set buffer indentation options
             Plug 'mattn/webapi-vim'
             "Plug 'PeterRincker/vim-argumentative'
             Plug 'AndrewRadev/sideways.vim' "move function arguments (and other delimited-by-something items) left and right
@@ -244,8 +244,8 @@
             Plug 'Valloric/YouCompleteMe',
                     \ { 
                         \ 'do': function('BuildYCM'),
-                        \ 'for': ['c', 'cpp', 'python', 'rust', 'go', 'objc', 'objcpp', 'javascript'],
                     \ }
+                        "\ 'for': ['c', 'cpp', 'python', 'rust', 'go', 'objc', 'objcpp', 'javascript'],
             " Using a non-master branch
             Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
