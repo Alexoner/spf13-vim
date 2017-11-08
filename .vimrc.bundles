@@ -129,7 +129,7 @@
             elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
                 Plug 'Lokaltog/vim-powerline'
             else
-                Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+                "Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
             endif
             Plug 'powerline/fonts', { 'do': ''}
             "Plug 'bling/vim-bufferline'
@@ -404,9 +404,8 @@
             Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'html', 'javascript']}
             Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'javascript'] }
             Plug 'tpope/vim-haml', { 'for': ['haml', 'sass', 'scss'] }
-            Plug 'mattn/emmet-vim', { 'for': ['css', 'scss', 'javascript'] }
+            Plug 'mattn/emmet-vim', {'for': ['html','javascript', 'css', 'jsx', 'javascript.jsx' ]}
         endif
-        Plug 'mattn/emmet-vim', {'for': ['html','javascript', 'css', 'jsx', 'javascript.jsx' ]}
     " }
 
     " Ruby {

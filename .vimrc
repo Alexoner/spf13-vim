@@ -223,7 +223,7 @@
         "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
         set t_8f=[38;2;%lu;%lu;%lum  " Needed in tmux
         set t_8b=[48;2;%lu;%lu;%lum  " Ditto
-        "let $NVIM_TUI_ENABLE_TRUE_COLOR   = 1
+        let $NVIM_TUI_ENABLE_TRUE_COLOR   = 1
       endif
     endif
     "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
@@ -367,6 +367,7 @@
     "autocmd FileType c,cpp,objc,objcpp setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
     " use spaces to extend tab
     autocmd FileType c,cpp,objc,objcpp setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+    autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
     "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell,puppet,ruby,yml,javascript,jsx,javascript.jsx,html,xhtml,xml,css,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
